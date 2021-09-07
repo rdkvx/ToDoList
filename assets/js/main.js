@@ -19,8 +19,8 @@ const criaTarefa = ()=>{
     dataFormatada = dataFormatada.format('DD/MM/YYYY');
 
     let dataTarefa = document.createElement("li");
-    dataTarefa.classList.add("date-task");
-    let dataHeader = `<p class="content-data">${dataFormatada}</p>`
+    dataTarefa.classList.add("date__task");
+    let dataHeader = `<p class="content__data">${dataFormatada}</p>`
     dataTarefa.innerHTML = dataHeader;
    
     
@@ -36,7 +36,7 @@ const criaTarefa = ()=>{
         tarefa.innerHTML = conteudo;
 
         const concluir = document.createElement("button");
-        concluir.classList.toggle("check-button");
+        concluir.classList.toggle("check__button");
         concluir.innerHTML = 'concluir';
         tarefa.appendChild(concluir);
 
@@ -63,7 +63,7 @@ const criaTarefa = ()=>{
         tarefa.innerHTML = conteudo;
 
         const concluir = document.createElement("button");
-        concluir.classList.toggle("check-button");
+        concluir.classList.toggle("check__button");
         concluir.innerHTML = 'concluir';
         tarefa.appendChild(concluir);
 
@@ -71,7 +71,7 @@ const criaTarefa = ()=>{
         deletar.innerHTML = "deletar";
         tarefa.appendChild(deletar);
 
-        const dataExistente = document.querySelectorAll(".date-task");
+        const dataExistente = document.querySelectorAll(".date__task");
         dataExistente.forEach(function(dtExistente){
             if(dateArray.indexOf(dataFormatada) != -1){
                 dtExistente.appendChild(tarefa);
@@ -96,7 +96,7 @@ let btnConcluir = (concluir, conteudo) =>{
 let btnDeletar = (tarefa, deletar, dataTarefa, dataFormatada) =>{
     deletar.addEventListener("click",()=>{
         const dataExistente = document.querySelectorAll(".task");
-        const dataARemover = document.querySelector(".date-task");
+        const dataARemover = document.querySelector(".date__task");
        
         if(dataExistente.length < 2){
             dataTarefa.remove();

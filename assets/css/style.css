@@ -11,7 +11,7 @@ body {
   min-height: 100vh;
 }
 
-.todo-list {
+.todo__list {
   background-color: #0B2027;
   font-family: "Space Mono", monospace;
   padding: 1rem;
@@ -31,20 +31,20 @@ body {
   justify-content: center;
 }
 
-.form-input,
-.form-button {
+.form__input,
+.form__button {
   border-radius: 0;
   padding: 0.75rem;
   font-size: 0.75rem;
 }
 
-.form-input {
+.form__input {
   outline: none;
   background-color: #F6F1D1;
   border-color: rgba(255, 255, 255, 0.1);
 }
 
-.form-button {
+.form__button {
   border: 1px;
   background: #F6F1D1;
   text-transform: uppercase;
@@ -52,7 +52,7 @@ body {
   margin-left: 0.25rem;
 }
 
-.form-button:hover {
+.form__button:hover {
   color: #F6F1D1;
   background: rgba(246, 241, 209, 0.1);
 }
@@ -93,19 +93,19 @@ body {
   padding: 0.75rem;
   font-size: 0.75rem;
 }
-.form-input {
+.form__input {
   outline: none;
   background-color: #F6F1D1;
   border-color: rgba(255, 255, 255, 0.1);
 }
-.form-button {
+.form__button {
   border: 1px;
   background: #F6F1D1;
   text-transform: uppercase;
   cursor: pointer;
   margin-left: 0.25rem;
 }
-.form-button:hover {
+.form__button:hover {
   color: #F6F1D1;
   background: rgba(246, 241, 209, 0.1);
 }
@@ -125,7 +125,7 @@ body {
   padding: 1rem 3rem;
 }
 
-.check-button, .delete-button {
+.check__button, .delete__button {
   background-color: #F6F1D1;
   border: none;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
@@ -139,7 +139,7 @@ body {
   color: #F6F1D1;
 }
 
-.check-icon {
+.check__icon {
   display: block;
   padding: 1px;
   width: 10px;
@@ -148,7 +148,7 @@ body {
   border-radius: 50%;
 }
 
-.task.done .check-icon {
+.task.done .check__icon {
   background-color: #0B2027;
 }
 
@@ -156,7 +156,7 @@ body {
   margin: 0;
 }
 
-.content-data { 
+.content__data { 
   color: #F6F1D1;
   display: flex;
   justify-content: flex-start;

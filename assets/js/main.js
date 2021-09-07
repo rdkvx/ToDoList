@@ -1,46 +1,112 @@
-let btnSubmit = document.querySelector("[data-form-submit]");
+const input = document.querySelector("[data-form-input]");
+const submit = document.querySelector("[data-form-button]");
+const date = document.querySelector("[data-form-date]");
 
-function addNotas(event){
+const dateArray = [];
+
+
+submit.addEventListener("click", (event)=>{
     event.preventDefault();
     
-    let inputNotas = document.querySelector("[data-form-input]")
-    let conteudoInputNotas = inputNotas.value;
-    let lista = document.querySelector("[data-list]");
-    let listaItem = document.createElement("li");
-    listaItem.classList.add("task");
-    let itemConteudo = `<p class="content">${conteudoInputNotas}</p>`
-    listaItem.innerHTML = itemConteudo;
-    inputNotas.value = "";
-    listaItem.appendChild(btnConcluiTarefa());
-    listaItem.appendChild(btnRemoveTarefa());
+    criaTarefa();
+    
+});
 
-    lista.appendChild(listaItem);
+const criaTarefa = ()=>{
+    
+    let dataFormatada = moment(date.value);
+    let hora = dataFormatada.format('HH:MM');
+    dataFormatada = dataFormatada.format('DD/MM/YYYY');
+
+    let dataTarefa = document.createElement("li");
+    dataTarefa.classList.add("date-task");
+    let dataHeader = `<p class="content-data">${dataFormatada}</p>`
+    dataTarefa.innerHTML = dataHeader;
+   
     
 
+    const lista = document.querySelector("[data-list]");
     
-}
+    
+    if(!dateArray.includes(dataFormatada)){
+        const tarefa = document.createElement("li");
+        tarefa.classList.add("task");
+        
+        const conteudo = `<p class="content">${hora} * ${input.value}</p>`;
+        tarefa.innerHTML = conteudo;
 
-function btnConcluiTarefa(){
-    let btnConclui = document.createElement("button");
-    btnConclui.innerHTML = "Concluir"
-    btnConclui.classList.add("check-button");
+        const concluir = document.createElement("button");
+        concluir.classList.toggle("check-button");
+        concluir.innerHTML = 'concluir';
+        tarefa.appendChild(concluir);
 
-    btnConclui.addEventListener("click", function(event){
-        let concluir = event.target.parentElement;
-        concluir.classList.toggle("done");
+        const deletar = document.createElement("button");
+        deletar.innerHTML = "deletar";
+        tarefa.appendChild(deletar);
+
+        
+        dataTarefa.appendChild(tarefa);
+        lista.appendChild(dataTarefa);
+        
+
+        btnConcluir(concluir, tarefa.firstChild);
+        btnDeletar(tarefa, deletar, dataTarefa, dataFormatada);
+        
+        input.value = "";
+        dateArray.push(dataFormatada);
+    }
+    else{
+        const tarefa = document.createElement("li");
+        tarefa.classList.add("task");
+        
+        const conteudo = `<p class="content">${hora} * ${input.value}</p>`;
+        tarefa.innerHTML = conteudo;
+
+        const concluir = document.createElement("button");
+        concluir.classList.toggle("check-button");
+        concluir.innerHTML = 'concluir';
+        tarefa.appendChild(concluir);
+
+        const deletar = document.createElement("button");
+        deletar.innerHTML = "deletar";
+        tarefa.appendChild(deletar);
+
+        const dataExistente = document.querySelectorAll(".date-task");
+        dataExistente.forEach(function(dtExistente){
+            if(dateArray.indexOf(dataFormatada) != -1){
+                dtExistente.appendChild(tarefa);
+                
+            }   
+        });
+        
+
+        btnConcluir(concluir, tarefa.firstChild);
+        btnDeletar(tarefa, deletar, dataTarefa, dataFormatada);
+
+        input.value = "";
+    }
+};
+
+let btnConcluir = (concluir, conteudo) =>{
+    concluir.addEventListener("click",()=>{
+        conteudo.classList.toggle("concluido");
     });
+};
 
-    return btnConclui;
-}
-
-function btnRemoveTarefa(){
-    let removeTarefa = document.createElement("button");
-    removeTarefa.innerHTML = "Remover";
-    removeTarefa.addEventListener("click", function(event){
-        let btnRemove = event.target.parentElement.remove();
+let btnDeletar = (tarefa, deletar, dataTarefa, dataFormatada) =>{
+    deletar.addEventListener("click",()=>{
+        const dataExistente = document.querySelectorAll(".task");
+        const dataARemover = document.querySelector(".date-task");
+       
+        if(dataExistente.length < 2){
+            dataTarefa.remove();
+            dataARemover.remove();
+            tarefa.remove();
+            
+            dateArray.splice(dateArray.indexOf(dataFormatada));
+        }
+        else{
+            tarefa.remove();
+        };  
     });
-
-    return removeTarefa;
-}
-
-btnSubmit.addEventListener("click", addNotas);
+};
